@@ -1,45 +1,47 @@
-//function to get movie name
-function getMovieDetails(movie) {
-    console.log('function check')
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', "http://www.omdbapi.com/?t=" + movie + "&apikey=cb3b5a4c")
-    xhr.send();
-    xhr.onload = function() {
-        console.log('check onload');
-        if (xhr.status == 200) {
-            var keep = JSON.parse(xhr.response);
-            if (keep.Response == 'True') {
-                console.log(xhr.response)
-                displayData(xhr.response);
-            } else {
-                alert(keep.Error)
-            }
-
-        } else {
-            console.log("error encountered", xhr.status)
-            var keep = JSON.parse(xhr.status);
-            console.log(keep.Error)
-        }
-    }
-    console.log('function end')
-}
-
 //click event on search key
 $('#search_movie').click(function() {
-    var movie_name = $('#movie_title').val();
-    // alert(movie_name);
-    console.log('movie ', movie_name)
+    var movie_name = $('#movie_title').val(); //jquery syntax  to search movie name
     getMovieDetails(movie_name);
 });
 
 
+
+//function to get movie name
+function getMovieDetails(movie) {
+    console.log('xhr request fired')
+    var xhr = new XMLHttpRequest(); //xhr object
+
+    xhr.open('GET', "http://www.omdbapi.com/?t=" + movie + "&apikey=cb3b5a4c")
+    xhr.send();
+    xhr.onload = function() {
+        console.log('xhr loaded');
+        if (xhr.status == 200) { //It means request has succeed 
+            var movieData = JSON.parse(xhr.response);
+            if (movieData.Response == 'True') {
+                console.log("responce in json form", xhr.response)
+                displayData(xhr.response);
+            } else {
+                alert(movieData.Error)
+            }
+
+        } else {
+            console.log("error encountered", xhr.status)
+            var movieData = JSON.parse(xhr.status);
+            console.log(movieData.Error)
+        }
+    }
+}
+
+
+
+
+//When user enters movie and clicks 'search button'
 //function to display movie details
 function displayData(data) {
     var obj = JSON.parse(data);
     console.log(obj)
 
-
-    //appending image
+    //removing earlier movie data
     data = document.querySelectorAll('.data');
     for (var i = 0; i < data.length; i++) {
         data[i].remove();
@@ -107,14 +109,15 @@ function displayData(data) {
 
 //function on giving grid of series
 $('#search-multiple').click(function() {
-    var movie = $('#movie_title').val()
+    var movie = $('#movie_title').val() //same movie name which user entered 
     displayGrid(movie);
 })
 
 
-function displayGrid(data) {
+//Grid :- To showcase different movie data
+function displayGrid(movie) {
     var xhr = new XMLHttpRequest()
-    xhr.open('GET', 'http://www.omdbapi.com/?s=' + data + '&apikey=cb3b5a4c');
+    xhr.open('GET', 'http://www.omdbapi.com/?s=' + movie + '&apikey=cb3b5a4c'); //api url for searching multiple searches
     xhr.send();
 
     xhr.onload = function() {
@@ -126,6 +129,9 @@ function displayGrid(data) {
     }
 }
 
+
+
+//Created this function to display multiple movie data
 
 function appendGrid(data) {
 
@@ -144,7 +150,7 @@ function appendGrid(data) {
     for (i = 0; i < allEle.length; i++) {
         // console.log(allEle[i])
         var div = document.createElement('div');
-        div.setAttribute('class', 'card card-ele');
+        div.setAttribute('class', 'card card-ele cardhover text-center m-1'); //appended bootstrap classes
         var img = document.createElement('img');
         img.setAttribute('src', allEle[i].Poster);
         img.setAttribute('class', 'card-img-top')
@@ -155,27 +161,25 @@ function appendGrid(data) {
         var year = document.createElement('p');
         year.textContent = allEle[i].Year;
         var a = document.createElement('a');
-        a.setAttribute('class', 'btn btn-primary details');
+        a.setAttribute('class', 'btn btn-outline-info details');
         a.setAttribute('href', '#accordionExample');
 
         a.textContent = 'More Details';
-        a.setAttribute('idx', i)
 
-        // var slide = document.createElement('a');
-        // slide.textContent = '^'
-        // slide.setAttribute('href', '#accordionExample');
-        // slide.setAttribute('class', 'btn btn-warning');
+        //Attribute index for assigning uniq number to each card
+        a.setAttribute('idx', i);
 
+        //Logic to add click event on particular card on page
         a.addEventListener('click', function() {
             var index = Number(this.getAttribute('idx'));
             getMovieDetails(allEle[index].Title);
-
         });
         body.append(h5)
         body.append(year)
         body.append(a)
             // body.append(slide)
         div.append(body)
+
         $('#grid').append(div);
     }
 }

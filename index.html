@@ -13,9 +13,11 @@
 
 <body>
     <div>
+
+        <!-- Carousal of images -->
         <!-- Carousal Start -->
         <div class="container size">
-            <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+            <div id="carouselExampleCaptions" class="carousel slide shadow" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
                     <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
@@ -52,11 +54,13 @@
             </div>
             <!-- Carousal End  -->
         </div>
-
     </div>
 
+
+    <!-- accordion Start -->
+
     <div class="container ">
-        <div class="accordion" id="accordionExample">
+        <div class="accordion shadow" id="accordionExample">
             <div class="card">
                 <div class="card-header" id="headingOne">
                     <h2 class="mb-0">
@@ -72,13 +76,9 @@
                             <div class="form-row">
                                 <div class="col-8">
                                     <input type="text" id="movie_title" class="form-control" placeholder="Title" required>
-                                    <!-- <input type="text" id="movie_title" class="form-control" placeholder="Title"> -->
-                                    <!-- <input type="text" id="inp" placeholder='add movie'> -->
-
                                 </div>
                                 <div class="col">
                                     <input type="submit" id="search_movie" class="form-control bg-primary text-white" value="Search">
-                                    <!-- <button id="search_movie">search movie</button> -->
                                 </div>
 
                             </div>
@@ -109,13 +109,15 @@
                 </div>
             </div>
         </div>
-        <div class="card-item">
+
+        <!-- multiple search button  -->
+        <div class="card-item ">
             <p>
                 <a id="search-multiple" class="btn btn-success d-flex justify-content-center" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Search for multiple</a>
             </p>
             <div class="row">
                 <div class="col">
-                    <div class="collapse multi-collapse " id="multiCollapseExample1">
+                    <div class="collapse multi-collapse shadow" id="multiCollapseExample1">
                         <div id="grid" class="card card-body unit d-flex justify-content-around">
                         </div>
                     </div>
@@ -125,18 +127,14 @@
     </div>
 
 
-    <nav class="navbar navbar-dark bg-dark d-flex justify-content-center p-3 shadow-lg p-3 mt-0 ">
+    <!-- Navigational Bar  -->
+    <nav class="navbar navbar-dark bg-dark d-flex justify-content-center p-3 shadow-lg p-3 mt-0">
         <div>
             <a class="navbar-brand " href="#">
                 <span class="font-head">Movie Search</span>
             </a>
         </div>
     </nav>
-
-
-
-
-
 
 
 

@@ -1,5 +1,10 @@
 body {
-    background: rgb(209, 240, 255);
+    background: rgb(244, 249, 251);
+}
+
+.cardhover:hover {
+    box-shadow: 3px 3px 5px rgb(204, 219, 251);
+    padding: 5px;
 }
 
 .font-head {
